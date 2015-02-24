@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "presigner"
   spec.version       = Presigner::VERSION
   spec.authors       = ["Masao Mochizuki"]
-  spec.email         = ["masaomoc.0301988@gmail.com"]
+  spec.email         = ["mochizukimasao.030@gmail.com"]
   spec.summary       = %q{CLI Tool to generate Pre-Signed URL for Amazon S3}
   spec.description   = %q{Presigner is a CLI tool to simple generate Pre-Signed URL for Amazon S3}
   spec.homepage      = ""
