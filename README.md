@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```bash
-$ presigner --bucket foobucket --key bar.txt --duration 3600 --profile default
+$ presigner generate --bucket foobucket --key bar.txt --duration 3600 --profile default
 ```
 
 - Currently, You can provide duration only in seconds.
