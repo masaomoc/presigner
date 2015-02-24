@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require 'presigner'
+require 'thor'
+
+class PresignerCLI < Thor
+  option :bucket,  :required => true
+  option :key,     :required => true
+  option :profile
+  option :duration
+  desc "generate",  "generate S3 presigned URL"
+
+  def generate
+    presigner= Presigner.new(options)
+    url = presigner.generate
+    $stdout.puts url
+  end
+end
+
+PresignerCLI::start()
