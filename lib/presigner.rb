@@ -20,7 +20,17 @@ class Presigner
 
     s3 = AWS::S3.new
     # check if specified bucket and key exist.
-    target_obj = s3.buckets[bucket].objects[key]
+    begin
+      target_obj = s3.buckets[bucket].objects[key]
+      if !target_obj.exists?
+        $stderr.puts "Specified bucket or key does not exist."
+        exit 1
+      end
+    rescue AWS::S3::Errors::Forbidden
+      $stderr.puts "Access to the S3 object is denied. Credential or target name might be wrong"
+      exit 1
+    end
+
     if !target_obj.exists?
       $stderr.puts "Specified bucket or key does not exist."
       exit 1
@@ -29,11 +39,11 @@ class Presigner
     presigner = AWS::S3::PresignV4.new(target_obj)
     expires = calc_duration
 
-    url = presigner.presign(:get, expires: expires, secure: true)
+    url = presigner.presign(:get, expires: base + duration, secure: true)
     url
   end
 
   def calc_duration
-    base + duration
+    duration
   end
 end
