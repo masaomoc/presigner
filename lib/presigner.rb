@@ -8,9 +8,6 @@ class Presigner
   DEFAULT_DURATION = 60 * 30
 
   def initialize(options)
-    prov = AWS::Core::CredentialProviders::
-             SharedCredentialFileProvider.new(profile_name: options[:profile])
-    AWS.config(credential_provider: prov)
     @bucket = options[:bucket]
     @key = options[:key]
     @duration = options[:duration].nil? ? DEFAULT_DURATION : options[:duration].to_i

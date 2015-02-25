@@ -7,10 +7,26 @@ class PresignerCLI < Thor
   option :bucket,  :required => true
   option :key,     :required => true
   option :profile
+  option :access_key
+  option :secret_key
   option :duration
+  option :region
   desc "generate",  "generate S3 presigned URL"
 
   def generate
+    aws_opts = {}
+    if options[:access_key] and options[:secret_key]
+      aws_opts[:access_key] = options[:access_key]
+      aws_opts[:secret_key] = options[:secret_key]
+    elsif options[:profile]
+      prov = AWS::Core::CredentialProviders::
+               SharedCredentialFileProvider.new(profile_name: options[:profile])
+      aws_opts[:credential_provider] = prov
+    end
+
+    aws_opts[:region] = options[:region] if options[:region]
+    AWS.config(aws_opts)
+
     presigner= Presigner.new(options)
     url = presigner.generate
     $stdout.puts url
