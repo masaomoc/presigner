@@ -31,6 +31,11 @@ class PresignerCLI < Thor
     url = presigner.generate
     $stdout.puts url
   end
+
+  desc "version",  "show version"
+  def version
+    $stdout.puts "Presigner v#{Presigner::VERSION}"
+  end
 end
 
 PresignerCLI::start()
