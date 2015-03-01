@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "thor"
   spec.add_dependency "aws-sdk-v1"
+  spec.add_dependency "pry"
 end
