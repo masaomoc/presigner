@@ -1,7 +1,6 @@
 require "presigner/version"
 
 require 'aws-sdk-v1'
-require 'pry'
 
 class Presigner
 
