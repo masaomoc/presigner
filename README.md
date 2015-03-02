@@ -1,4 +1,4 @@
-# Presigner
+# Presigner [![Build Status](https://travis-ci.org/masaomoc/presigner.svg?branch=master)](https://travis-ci.org/masaomoc/presigner)
 
 Presigner is a CLI tool to generate Pre-Signed URL for Amazon S3.
 
