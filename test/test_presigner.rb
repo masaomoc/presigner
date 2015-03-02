@@ -27,7 +27,7 @@ class PresignerTest < Test::Unit::TestCase
 
   test "check if duration calculation is correct" do
     actual = @presigner.calc_duration
-    assert_equal(actual, @presigner.base + Presigner::DEFAULT_DURATION)
+    assert_equal(actual, Presigner::DEFAULT_DURATION)
   end
 
 end
