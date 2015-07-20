@@ -10,14 +10,15 @@ class Presigner
     @bucket = options[:bucket]
     @key = options[:key]
     @duration = options[:duration].nil? ? DEFAULT_DURATION : options[:duration].to_i
+    @region = options[:region].nil? ? "us-east-1" : options[:region]
     @base = Time.now.to_i
   end
 
-  attr_reader :duration, :base, :bucket, :key
+  attr_reader :duration, :base, :bucket, :key, :region
 
   def generate
 
-    s3 = AWS::S3.new
+    s3 = AWS::S3.new(region: region)
     # check if specified bucket and key exist.
     begin
       target_obj = s3.buckets[bucket].objects[key]
