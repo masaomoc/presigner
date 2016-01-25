@@ -30,4 +30,23 @@ class PresignerTest < Test::Unit::TestCase
     assert_equal(actual, Presigner::DEFAULT_DURATION)
   end
 
+  test "check Presigner.new without optional arguments" do
+    presigner = Presigner.new(bucket: 'foobucket',
+                              key: 'barkey')
+    ## maybe < 2 sec.
+    assert_true(presigner.base < Time.now.to_i + 2 && presigner.base > Time.now.to_i - 1)
+    assert_equal(Presigner::DEFAULT_DURATION, presigner.duration)
+    assert_equal("us-east-1", presigner.region)
+  end
+
+  test "check Presigner.new with optional arguments" do
+    presigner = Presigner.new(bucket: 'foobucket',
+                              key: 'barkey',
+                              duration: 123,
+                              region: 'ap-northeast-1',
+                              )
+    assert_equal(123, presigner.duration)
+    assert_equal("ap-northeast-1", presigner.region)
+  end
+
 end
