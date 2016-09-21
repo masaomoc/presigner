@@ -9,7 +9,7 @@ class Presigner
   def initialize(options)
     @bucket = options[:bucket]
     @key = options[:key]
-    @duration = options[:duration] || DEFAULT_DURATION
+    @duration = options[:duration].to_i || DEFAULT_DURATION
     @region = options[:region] || "us-east-1"
     @base = Time.now.to_i
   end
